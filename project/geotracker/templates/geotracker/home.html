@@ -3,14 +3,27 @@
   <body>
    <h2>Your Friends are waiting for you!</h2>
    <div id='map' width='100%' style='height:400px'></div>
-<script>
+   <pre id='location' style="visibility:hidden"></pre>
+  <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmU3IiwiYSI6ImNqcWd5NG5rbjVpbmQzeGxnYzE4eXl1Y3IifQ.aXA5Gh03KbC5ECIfv5XY0A';
   var map = new mapboxgl.Map({
-    container: 'map',
-     style: 'mapbox://styles/mapbox/streets-v10',
-     center: [-77.03, 38.91],
-     zoom: 9
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/streets-v9',
+      center: [-96, 37.8], // starting position
+      zoom: 3 // starting zoom
   });
-</script>
+
+  // Add geolocate control to the map.
+  var geolocate = new mapboxgl.GeolocateControl();
+  map.addControl(geolocate);
+
+  geolocate.on('geolocate', function(e) {
+      var lon = e.coords.longitude;
+      var lat = e.coords.latitude
+      var position = [lon, lat];
+      document.getElementById('location').innerHTML = position;
+});
+
+  </script>
   </body>
 {% endblock %}

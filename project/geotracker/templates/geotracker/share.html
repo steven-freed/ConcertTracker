@@ -1,0 +1,29 @@
+{% extends "geotracker/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+          {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Share Concert</legend>
+                Artist:<br>
+                <input type="text" name="artist">
+                <br>
+                <br>
+                Venue:<br>
+                <input type="text" name="venue">
+                <br>
+                <br>
+                Start Time:<br>
+                <input type="time" name="start_time">
+                <br>
+                <br>
+                End Time:<br>
+                <input type="time" name="end_time">
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Share</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
