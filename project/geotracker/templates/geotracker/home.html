@@ -1,0 +1,7 @@
+{% extends "geotracker/base.html" %}
+{% block content %}
+  {% for loc in locations %}
+  <h1>{{ loc.user }}</h1>
+  <p>longitude: {{ loc.longitude }} latitude: {{ loc.latitude }}</p>
+  {% endfor %}
+{% endblock %}
