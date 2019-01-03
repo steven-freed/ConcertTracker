@@ -1,7 +1,16 @@
 {% extends "geotracker/base.html" %}
 {% block content %}
-  {% for loc in locations %}
-  <h1>{{ loc.user }}</h1>
-  <p>longitude: {{ loc.longitude }} latitude: {{ loc.latitude }}</p>
-  {% endfor %}
+  <body>
+   <h2>Your Friends are waiting for you!</h2>
+   <div id='map' width='100%' style='height:400px'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmU3IiwiYSI6ImNqcWd5NG5rbjVpbmQzeGxnYzE4eXl1Y3IifQ.aXA5Gh03KbC5ECIfv5XY0A';
+  var map = new mapboxgl.Map({
+    container: 'map',
+     style: 'mapbox://styles/mapbox/streets-v10',
+     center: [-77.03, 38.91],
+     zoom: 9
+  });
+</script>
+  </body>
 {% endblock %}

@@ -18,21 +18,3 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
-'''
-class Post(DynamicDocument):
-    user = StringField(max_length=255)
-    artist = StringField(max_length=255)
-    venue = StringField(max_length=255)
-    date = DateTimeField(auto_now_add=True)
-    start_time = DateTimeField()
-    end_time = DateTimeField()
-
-class Fan(DynamicDocument):
-    _id = ObjectIdField()
-    user = StringField(max_length=255)
-    image = ImageField(default='default.jpeg', upload_to='profile_pics')
-    posts = ListField(
-        model_container=Post,
-    )
-'''
