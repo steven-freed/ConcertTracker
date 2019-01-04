@@ -14,5 +14,5 @@ class Fan(mclient.DynamicDocument):
     user = mclient.StringField(max_length=255)
     currentPosition = mclient.PointField()
     friends = mclient.ListField(mclient.StringField(max_length=100))
-    posts = mclient.ListField()
+    posts = mclient.EmbeddedDocumentListField(document_type=Post)
     meta = {'collection': 'Fans'}
