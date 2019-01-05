@@ -1,10 +1,17 @@
 {% extends "geotracker/base.html" %}
+{% load static %}
 {% block content %}
   <body>
    <h2>Your Friends are waiting for you!</h2>
    <div id='map' width='100%' style='height:400px'></div>
-   <pre id='location' style="visibility:hidden"></pre>
+     <form id="myform" name="myform" method="POST">
+       {% csrf_token %}
+      <input type="hidden" id="token" value="{{ csrf_token }}"/>
+    <input type="hidden" id="location" name="location"/>
+    </form>
+  <script src="/static/geotracker/jquery-3.3.1.min.js"></script>
   <script>
+
   mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmU3IiwiYSI6ImNqcWd5NG5rbjVpbmQzeGxnYzE4eXl1Y3IifQ.aXA5Gh03KbC5ECIfv5XY0A';
   var map = new mapboxgl.Map({
       container: 'map', // container id
@@ -18,11 +25,36 @@
   map.addControl(geolocate);
 
   geolocate.on('geolocate', function(e) {
+      console.log('locating...');
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
-      var position = [lon, lat];
-      document.getElementById('location').innerHTML = position;
-});
+      var position = lon + " " + lat;
+      var element = document.getElementById('location');
+      element.value = position;
+
+      var url = 'http://localhost:8000'
+      var params = JSON.stringify({
+          longitude: lon,
+          latitude: lat
+      });
+    // Create a new AJAX request object
+    var request = new XMLHttpRequest();
+
+    // Open a connection to the server
+    request.open('POST', url, true);
+
+    // Run our handleResponse function when the server responds
+  //  request.addEventListener('readystatechange', handleResponse);
+
+    // Actually send the request
+    var csrftoken = '{{ csrf_token }}'
+    request.setRequestHeader("Content-type", "application/json");
+    request.setRequestHeader('X-CSRFToken', csrftoken);
+    console.log("PARAMS: " + params);
+
+    request.send(params);
+
+    });
 
   </script>
   </body>
