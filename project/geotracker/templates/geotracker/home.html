@@ -6,7 +6,6 @@
    <div id='map' width='100%' style='height:400px'></div>
      <form id="myform" name="myform" method="POST">
        {% csrf_token %}
-      <input type="hidden" id="token" value="{{ csrf_token }}"/>
     <input type="hidden" id="location" name="location"/>
     </form>
   <script src="/static/geotracker/jquery-3.3.1.min.js"></script>
@@ -43,15 +42,10 @@
     // Open a connection to the server
     request.open('POST', url, true);
 
-    // Run our handleResponse function when the server responds
-  //  request.addEventListener('readystatechange', handleResponse);
-
     // Actually send the request
     var csrftoken = '{{ csrf_token }}'
     request.setRequestHeader("Content-type", "application/json");
     request.setRequestHeader('X-CSRFToken', csrftoken);
-    console.log("PARAMS: " + params);
-
     request.send(params);
 
     });
