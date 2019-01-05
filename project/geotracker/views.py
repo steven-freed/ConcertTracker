@@ -15,15 +15,11 @@ def home(request):
         "mclient": mclient
     }
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         data = json.loads(request.body)
-        new_location = [data['longitude'], data['latitude']]
+        new_location = [data['longitude'],data['latitude']]
         Fan.objects(user=str(request.user)).modify(set__currentPosition=new_location, upsert=True)
         print(new_location)
-
-    # get users location if authenticated
-    if request.user.is_authenticated:
-        Fan.objects(user=str(request.user)).modify(set__coordinates=[0,0], image='http://localhost:8000/media/%s' % request.user.profile.image, upsert=True)
 
     return render(request, 'geotracker/home.html', context)
 
