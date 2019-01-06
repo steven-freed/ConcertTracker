@@ -25,6 +25,7 @@ def home(request):
     for c in ConcertPost.objects:
         new_o = Object()
         new_o.user = c.user
+        new_o.userImage = c.userImage
         new_o.artist = c.artist
         new_o.venue = c.venue
         new_o.date = '%s' % c.date
@@ -55,6 +56,7 @@ def share(request):
         )
         new_concert = ConcertPost(
         user=str(request.user),
+        userImage=str("/media/%s" % request.user.profile.image),
         artist=request.POST.get('artist'),
         venue=request.POST.get('venue'),
         date=str(datetime.datetime.now()),
