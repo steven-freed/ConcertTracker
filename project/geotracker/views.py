@@ -12,7 +12,7 @@ import json
 def home(request):
 
     context = {
-        "mclient": mclient
+        "userImage": request.user
     }
 
     if request.method == 'POST' and request.user.is_authenticated:
