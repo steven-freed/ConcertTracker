@@ -9,10 +9,31 @@ from django.contrib.auth.models import User
 import datetime
 import json
 
+'''
+    Class that allows for objects to be json serializable
+'''
+class Object:
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+            sort_keys=True)
+
 def home(request):
 
+    concerts = []
+
+    # gets all concertpost objects from mongo
+    for c in ConcertPost.objects:
+        new_o = Object()
+        new_o.user = c.user
+        new_o.artist = c.artist
+        new_o.venue = c.venue
+        new_o.date = '%s' % c.date
+        new_o.starttime = '%s' % c.starttime
+        new_o.endtime = '%s' % c.endtime
+        concerts.append(new_o.toJSON());
+
     context = {
-        "userImage": request.user
+        "concerts": concerts
     }
 
     if request.method == 'POST' and request.user.is_authenticated:
