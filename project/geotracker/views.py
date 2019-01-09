@@ -28,6 +28,8 @@ def home(request):
         new_o.userImage = c.userImage
         new_o.artist = c.artist
         new_o.venue = c.venue
+        new_o.city = c.city
+        new_o.state = c.state
         new_o.date = '%s' % c.date
         new_o.starttime = '%s' % c.starttime
         new_o.endtime = '%s' % c.endtime
@@ -50,6 +52,8 @@ def share(request):
         new_post = Post(
         artist=request.POST.get('artist'),
         venue=request.POST.get('venue'),
+        city=request.POST.get('city'),
+        state=request.POST.get('state'),
         date=str(datetime.datetime.now()),
         starttime=request.POST.get('start_time'),
         endtime=request.POST.get('end_time')
@@ -59,6 +63,8 @@ def share(request):
         userImage=str("/media/%s" % request.user.profile.image),
         artist=request.POST.get('artist'),
         venue=request.POST.get('venue'),
+        city=request.POST.get('city'),
+        state=request.POST.get('state'),
         date=str(datetime.datetime.now()),
         starttime=request.POST.get('start_time'),
         endtime=request.POST.get('end_time')

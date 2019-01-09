@@ -8,6 +8,8 @@ class ConcertPost(mclient.DynamicDocument):
     userImage = mclient.StringField(max_length=255)
     artist = mclient.StringField(max_length=255)
     venue = mclient.StringField(max_length=255)
+    city = mclient.StringField(max_length=255)
+    state = mclient.StringField(max_length=2)
     date = mclient.DateTimeField(default=datetime.datetime.utcnow)
     starttime = mclient.DateTimeField()
     endtime = mclient.DateTimeField()
@@ -16,6 +18,8 @@ class ConcertPost(mclient.DynamicDocument):
 class Post(mclient.EmbeddedDocument):
     artist = mclient.StringField(max_length=255)
     venue = mclient.StringField(max_length=255)
+    city = mclient.StringField(max_length=255)
+    state = mclient.StringField(max_length=2)
     date = mclient.DateTimeField(auto_now_add=True)
     starttime = mclient.DateTimeField()
     endtime = mclient.DateTimeField()
