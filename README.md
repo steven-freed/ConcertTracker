@@ -9,10 +9,14 @@ Django is a web framework that eases many backend tasks by incorporating them in
 
 ## App Sample Screen Shots
 
-| ![Alt text](/project/appScreenShots/Home.png?raw=true) | 
+| ![Alt text](/project/appScreenShots/Home.png?raw=true) |
 |:--:|
 | *Home Page: Search for concerts near you* |
 
 | ![Alt text](/project/appScreenShots/Profile.png?raw=true) |
 |:--:|
 | *Profile* |
+
+| ![Alt text](/project/appScreenShots/Registration.png?raw=true) |
+|:--:|
+| *Registration Page* |
